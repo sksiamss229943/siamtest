@@ -5,7 +5,7 @@ function Tasks(data) {
     data.deleteItem(data.id);
   }
   return (
-    <div onClick={deleteNote} className="box m-2 w-25 text-white fw-bold bg-warning rounded p-3 py-4 shadow-sm">
+    <div style={{width: '15rem'}} onClick={deleteNote} className="box text-white fw-bold bg-warning rounded m-2 p-3 shadow-sm">
       <h4>{data.data.title}</h4>
       <h6>  
         {data.data.desc}
