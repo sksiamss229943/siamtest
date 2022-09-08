@@ -1,68 +1,42 @@
-import React, { useState } from "react";
-import Tasks from "./components/Tasks";
+import React, { useEffect, useState } from "react";
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
   const [data, setData] = useState([]);
-  const onDelete = (e) => {
-    setData((oldData) => {
-      return oldData.filter((c,i)=>{
-        return i!==e;
-      })
-    });
+  const getData = async () => {
+    const res = await fetch("https://data.covid19india.org/data.json");
+    const data = await res.json();
+    setData(data.statewise);
   };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
-    <>
-      <div className="w-100 bg-warning py-4 text-center text-white shadow">
-        <h3>SiamKeep</h3>
-      </div>
-      <div className="container w-100 p-4">
-        <form
-          className="w-100 text-center"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <input
-            className="form-control title w-75 mx-auto my-2 shadow-sm"
-            type="text"
-            placeholder="Title"
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
-          />
-          <input
-            className="form-control w-75 mx-auto my-2 shadow-sm"
-            type="text"
-            placeholder="Description"
-            onChange={(e) => {
-              setDesc(e.target.value);
-            }}
-            value={desc}
-          />
-          <input
-            type="submit"
-            className="w-75 btn my-2 btn-warning shadow-sm text-white fw-bold"
-            onClick={() => {
-              if (title == "" && desc == "") {
-                return;
-              } else {
-                setData([{ title: title, desc: desc }, ...data]);
-                setTitle("");
-                setDesc("");
-                document.querySelector(".title").focus();
-              }
-            }}
-          />
-        </form>
-        <div className="row mt-4 justify-content-center">
-          {!data == [] &&
-            data.map((e, ind) => (
-              <Tasks key={ind} deleteItem={onDelete} id={ind} data={e} />
-            ))}
-        </div>
-      </div>
-    </>
+    <div className="m-4">
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>Confirmed</th>
+            <th>Recovered</th>
+            <th>Deaths</th>
+            <th>Actives</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((e,index) => (
+            <tr key={index}>
+              <td>{e.state}</td>
+              <td>{e.confirmed}</td>
+              <td>{e.recovered}</td>
+              <td>{e.deaths}</td>
+              <td>{e.active}</td>
+              <td>{e.lastupdatedtime}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
