@@ -24,14 +24,14 @@ function App() {
         }}
       >
         <input
-          className="form-control title w-50 mx-auto my-2 shadow-sm"
+          className="form-control title w-75 mx-auto my-2 shadow-sm"
           type="text"
           placeholder="Title"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
         <input
-          className="form-control w-50 mx-auto my-2 shadow-sm"
+          className="form-control w-75 mx-auto my-2 shadow-sm"
           type="text"
           placeholder="Description"
           onChange={(e) => {
@@ -41,7 +41,7 @@ function App() {
         />
         <input
           type="submit"
-          className="w-50 btn my-2 btn-warning shadow-sm text-white fw-bold"
+          className="w-75 btn my-2 btn-warning shadow-sm text-white fw-bold"
           onClick={() => {
             if (title == "" && desc == "") {
               return;
