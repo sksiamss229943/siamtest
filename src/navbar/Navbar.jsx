@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-light shadow py-3">
@@ -34,6 +33,11 @@ function Navbar() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/contact">
                 Contact
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/search">
+                Search
               </NavLink>
             </li>
           </ul>

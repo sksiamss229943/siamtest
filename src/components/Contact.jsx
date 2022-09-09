@@ -2,8 +2,8 @@ import React from 'react'
 
 function Contact() {
   return (
-    <div>Contact</div>
+  <h2 className="text-center my-3">Contact</h2>
   )
 }
 
-export default Contact
+export default Contact;
