@@ -1,43 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from 'react'
+import { Route, Routes } from 'react-router-dom';
+import About from './components/About';
+import Contact from './components/Contact';
+import Home from './components/Home';
+import Navbar from './navbar/Navbar';
 
 function App() {
-  const [data, setData] = useState([]);
-  const getData = async () => {
-    const res = await fetch("https://data.covid19india.org/data.json");
-    const data = await res.json();
-    setData(data.statewise);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
   return (
-    <div className="m-4">
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>State</th>
-            <th>Confirmed</th>
-            <th>Recovered</th>
-            <th>Deaths</th>
-            <th>Actives</th>
-            <th>Update</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((e,index) => (
-            <tr key={index}>
-              <td>{e.state}</td>
-              <td>{e.confirmed}</td>
-              <td>{e.recovered}</td>
-              <td>{e.deaths}</td>
-              <td>{e.active}</td>
-              <td>{e.lastupdatedtime}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+    <>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
+      </Routes> 
+    </>
+  )
 }
 
 export default App;
